@@ -1,128 +1,74 @@
-/**
- * Type Definitions
- *
- * File ini berisi semua TypeScript interfaces dan types yang digunakan
- * di berbagai tempat dalam aplikasi.
- *
- * Best Practices:
- * - Gunakan PascalCase untuk interface names
- * - Export semua interfaces agar bisa digunakan di file lain
- * - Group related interfaces bersama
- * - Add comments untuk explain complex types
- */
+import type { ReactNode } from "react";
 
-// ==========================================
-// UI Component Types
-// ==========================================
+/* ============================================================
+   Shared TypeScript types/interfaces
+   Centralized di sini agar reusable di multiple files.
+   ============================================================ */
 
-/**
- * Button variant types
- * Gunakan ini untuk Button component
- */
-export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+/** Variant styling untuk Button */
+export type ButtonVariant = "primary" | "secondary" | "ghost";
 
-/**
- * Example: Button Props
- * Uncomment dan sesuaikan dengan kebutuhan
- */
-// export interface ButtonProps {
-//   variant?: ButtonVariant;
-//   children: React.ReactNode;
-//   onClick?: () => void;
-//   className?: string;
-//   disabled?: boolean;
-// }
+export interface ButtonProps {
+  variant?: ButtonVariant;
+  children: ReactNode;
+  /** Render sebagai <a> jika href diisi, selain itu <button> */
+  href?: string;
+  onClick?: () => void;
+  className?: string;
+  fullWidth?: boolean;
+  type?: "button" | "submit";
+}
 
-// ==========================================
-// Section Data Types
-// ==========================================
+/** Satu item link pada navigasi */
+export interface NavLink {
+  label: string;
+  href: string;
+}
 
-/**
- * TODO: Define interfaces untuk data yang digunakan di sections
- *
- * Contoh:
- * - ServiceItem untuk services section
- * - TeamMember untuk team section
- * - Testimonial untuk testimonials section
- * - dll.
- */
+/** Kartu layanan / service */
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  /** Nama emoji/icon sederhana untuk placeholder */
+  icon: string;
+}
 
-/**
- * Example: Service/Product Item
- */
-// export interface ServiceItem {
-//   id: number;
-//   title: string;
-//   description: string;
-//   icon?: string;
-//   image?: string;
-// }
+/** Project / portfolio item */
+export interface Project {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
 
-/**
- * Example: Team Member
- */
-// export interface TeamMember {
-//   id: number;
-//   name: string;
-//   position: string;
-//   bio?: string;
-//   image: string;
-//   socialLinks?: {
-//     linkedin?: string;
-//     twitter?: string;
-//     github?: string;
-//   };
-// }
+/** Testimonial dari client */
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  avatar: string;
+}
 
-/**
- * Example: Testimonial
- */
-// export interface Testimonial {
-//   id: number;
-//   name: string;
-//   position: string;
-//   company: string;
-//   message: string;
-//   avatar?: string;
-//   rating?: number;
-// }
+/** Item FAQ (pertanyaan + jawaban) */
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
 
-// ==========================================
-// Navigation Types
-// ==========================================
+/** Logo brand pada section "Trusted by" */
+export interface BrandLogo {
+  name: string;
+  /** SVG/text wordmark sederhana */
+  label: string;
+}
 
-/**
- * Navigation menu item
- */
-// export interface NavItem {
-//   label: string;
-//   href: string;
-//   external?: boolean;
-// }
-
-// ==========================================
-// Form Types (if needed)
-// ==========================================
-
-/**
- * Contact form data
- */
-// export interface ContactFormData {
-//   name: string;
-//   email: string;
-//   message: string;
-// }
-
-// ==========================================
-// TODO: Add more types as needed!
-// ==========================================
-
-/**
- * Tips:
- * 1. Define types berdasarkan data yang kamu perlukan
- * 2. Lihat design Figma untuk understand data structure
- * 3. Make types reusable across components
- * 4. Use optional properties (?) untuk data yang tidak selalu ada
- * 5. Consider creating separate files jika types terlalu banyak
- *    Example: types/components.ts, types/data.ts, etc.
- */
+/** Generic props untuk wrapper Card */
+export interface CardProps {
+  children: ReactNode;
+  className?: string;
+}

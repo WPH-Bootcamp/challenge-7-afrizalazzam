@@ -11,34 +11,71 @@
 @source "./**/*.{js,jsx,ts,tsx}";
 @source "../index.html";
 
-/**
- * Custom Global Styles
- *
- * Add your custom global styles here if needed
- * Prefer using Tailwind utilities in components
- */
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
+  --color-brand-50: #fff4f0;  /* tint terang turunan, utk background halus */
+  --color-brand-100: #ffe0d8; /* Figma 100 */
+  --color-brand-200: #ffccbf; /* turunan */
+  --color-brand-300: #ff9477; /* turunan */
+  --color-brand-400: #ff7a59; /* turunan */
+  --color-brand-500: #ff623e; /* Figma 200 — PRIMARY */
+  --color-brand-600: #cc4e32; /* Figma 300 — accent/hover */
+  --color-brand-700: #80311f; /* Figma 400 — paling gelap */
+
+  /* === Semantic (light default; di-override di .dark) === */
+  --color-canvas: #ffffff;  /* background halaman */
+  --color-surface: #ffffff; /* kartu / navbar / footer */
+  --color-subtle: #f9fafb;  /* section selang-seling */
+  --color-line: #f1f2f4;    /* border */
+  --color-ink: #1a1a1a;     /* heading & teks utama */
+  --color-muted: #6b7280;   /* paragraf */
+
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+/* Override nilai token saat dark mode */
+.dark {
+  --color-canvas: #0a0a0c;
+  --color-surface: #18181c;
+  --color-subtle: #121215;
+  --color-line: #2a2a31;
+  --color-ink: #f5f5f6;
+  --color-muted: #a1a1aa;
+}
 
 /* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Optional: Custom scrollbar styles */
-/* Uncomment if you want custom scrollbar
-::-webkit-scrollbar {
-  width: 10px;
+body {
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+@utility text-gradient-brand {
+  background: linear-gradient(90deg, var(--color-brand-500), var(--color-brand-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
-*/
